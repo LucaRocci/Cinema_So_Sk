@@ -1,0 +1,5 @@
+.carousel-control-prev-icon,.carousel-control-next-icon{
+  background-color: black !important;
+  box-sizing: border-box;
+  padding:20px;
+}
