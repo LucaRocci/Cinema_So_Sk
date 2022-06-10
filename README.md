@@ -1,2 +1,8 @@
 # Cinema_So_Sk
-Cristian fai poco lo sborone, diocane <3
+
+# Contributors
+Cristian
+Marco
+Roberto
+Fabio
+Luca
