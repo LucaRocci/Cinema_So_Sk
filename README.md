@@ -1,4 +1,5 @@
 # Cinema_So_Sk
+Simple cinema website.
 
 # Contributors
 Cristian
