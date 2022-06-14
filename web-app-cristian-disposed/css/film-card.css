@@ -1,0 +1,7 @@
+.film-card{
+    background-color: #eee;
+}
+
+.film-card *{
+    list-style-type: none;
+}
