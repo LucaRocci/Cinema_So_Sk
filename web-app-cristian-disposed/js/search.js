@@ -35,11 +35,11 @@ $("#search_input").focusout(function(){
 function appendChildFilmCard(f){    
 
     var cardDiv = document.createElement("div");
-    cardDiv.classList = "container-fluid col-4 bg-primary mt-2 mb-2 p-2";
+    cardDiv.classList = "container-fluid col-4 mt-2 mb-2 p-2 col-lg-4 d-flex align-items-stretch film-card";
     cardDiv.style = "width: 18rem;";
 
     var cardImg = document.createElement("img");
-    cardImg.src = "./carousel-photos/img"+Math.floor(Math.random()*5+1)+".jpg";
+    cardImg.src = "./carousel-photos/img2.jpg";//+Math.floor(Math.random()*5+1)+".jpg";
     cardImg.classList = "card-img-top";
     
     var cardBody = document.createElement("div");
@@ -48,29 +48,18 @@ function appendChildFilmCard(f){
     var cardh5 =document.createElement("h5");
     cardh5.textContent = f.title;
 
-    var cardP = document.createElement("p");
-    cardP.textContent = f.description;
+    var cardPDesc = document.createElement("p");
+    cardPDesc.textContent = f.description;
     
-    var ul = document.createElement("ul");
-    ul.classList = "list-group list-group-flush";
-
-    var li1 = document.createElement("li");
-    li1.classList = "list-group-item";
-    li1.textContent = f.genre;
-    
-    var li2 = document.createElement("li");
-    li1.classList = "list-group-item";
-    li1.textContent =f.releaseYear;
-
-    ul.appendChild(li1);
-    ul.appendChild(li2);
+    var cardPYear = document.createElement("p");
+    cardPYear.textContent = f.releaseYear;
 
     cardBody.appendChild(cardh5);
-    cardBody.appendChild(cardP);
+    cardBody.appendChild(cardPDesc);
+    cardBody.appendChild(cardPYear);
 
     cardDiv.appendChild(cardImg);
     cardDiv.appendChild(cardBody);
-    cardDiv.appendChild(ul);
 
     $("#cards-container").append(cardDiv);
 }

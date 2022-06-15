@@ -1,0 +1,10 @@
+('The Godfather', 'Francis Ford Coppola', 125, 1972),
+('Kill bill','Quentin Tarantino',112, 2003),
+('I sette samurai','Akira Kurosawa',128, 1954),
+('Cuore selvaggio', 'David Lynch', 129, 1990),
+('Guerre stellari', 'George Lucas',122, 1977),
+('Il signore degli anelli', 'Peter Jackson',143, 2001),
+('Shining', 'Stanley Kubrick' , 115, 1980),
+('Psyco', 'Alfred Hitchcock' , 12 , 1960),
+('Grand Budapest Hotel', 'Wes Anderson' , 106 , 2014),
+('Jurassic Park', 'Steven Spielberg' , 118 , 1993);
