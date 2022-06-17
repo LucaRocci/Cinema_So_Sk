@@ -7,33 +7,42 @@
     <link rel="stylesheet" href="./style/style.css">
     <title>Scheda Film</title>
 </head>
-<body>
-    <table>
-            <?php
-                $idfilm = $_GET["idfilm"]; //$_SESSION["idfilm"];
-                $hostname = "localhost";
-                $dbuser = "root";
-                $dbpwd = "";
-                $db = "cinema";
-                $conn = new mysqli($hostname, $dbuser, $dbpwd,$db) or die("Connect failed: %s\n". $conn -> error);
-                $sql = "SELECT * FROM film WHERE IDfilm=".$idfilm;
-                $result = $conn->query($sql);
+<body>    
+    <?php
+        require("DBConnection.php");
+        
+        if(!isset($_GET["idfilm"])){                
+            header("Location: index.php");
+            exit();
+        }
 
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    $row = $result->fetch_assoc();
-                    echo "<tr><td>Titolo</td><td>".$row["Title"]."</td></tr>";
-                    echo "<tr><td>Durata</td><td>".$row["Length"]."</td></tr>";
-                    echo "<tr><td>AnnoRilascita</td><td>".$row["ReleaseYear"]."</td></tr>";
-                    echo "</table>";                
-                    echo "<h1>".$row["Title"]."</h1>";
-                    echo "<img src='".$row["img"]."' alt='Locandina ".$row["Title"]."'>";
-                    echo "<h3>Trama</h3><p>".$row["Plot"]."</p>";
-                } else {
-                echo "</table><br><h1>Problema col db, contattare assistenza</h1>";
-                }
-                $conn->close();
-            ?>
+        try{                    
+            $dbconn = new DBConnection();
+
+            $idfilm = $_GET["idfilm"];
+            $query = "SELECT * FROM film WHERE IDfilm=".$idfilm;
+            
+            $result_array = $dbconn->selectQuery($query)[0];
+            $dbconn->close();
+
+            printFilm($result_array);
+        }catch(DBConnectionException $e){
+            echo "<p><h1>".$e->getMessage()."</h1></p>";
+            http_response_code($e->getCode());
+            exit();
+        }
+
+        function printFilm($film){
+            echo "<table>";
+            echo "<tr><td>Titolo</td><td>".$film["Title"]."</td></tr>";
+            echo "<tr><td>Durata</td><td>".$film["Length"]."</td></tr>";
+            echo "<tr><td>AnnoRilascita</td><td>".$film["ReleaseYear"]."</td></tr>";
+            echo "</table>";                
+            echo "<h1>".$film["Title"]."</h1>";
+            echo "<img src='".$film["img"]."' alt='Locandina ".$film["Title"]."'>";
+            echo "<h3>Trama</h3><p>".$film["Plot"]."</p>";
+        }
+    ?>
     
 </body>
 </html>
