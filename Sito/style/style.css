@@ -1,0 +1,48 @@
+body{
+    background-color: #5EB1BF;
+    
+}
+
+h1{
+    font-size: 50px;
+    color: white;
+    background-color: #3a818d;
+    border: 3px solid white;
+    border-radius: 40px;
+
+    width: fit-content;
+    margin: 0 auto;
+    padding: 1%;
+}
+
+table{
+    background-color: lightsalmon;
+    border: 3px solid white;
+    border-radius: 40px;
+
+    margin: 10px;
+    margin-top: 2%;
+    padding: 1%;
+}
+
+th{
+    font-size: 2vw;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    color: white;
+    background-color: #3a818d;
+
+    border: 3px solid white;
+    border-radius: 40px;
+    
+}
+
+td{
+    font-size: 20px;
+    color: white; 
+}
+
+.day{
+    font-size: 15px;
+    text-decoration: none;
+}
