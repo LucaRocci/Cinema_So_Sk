@@ -26,6 +26,8 @@
             $dbconn->close();
 
             printFilm($result_array);
+
+            echo "<a href='index.php'>Torna alla pagina principale</a>";
         }catch(DBConnectionException $e){
             echo "<p><h1>".$e->getMessage()."</h1></p>";
             http_response_code($e->getCode());
