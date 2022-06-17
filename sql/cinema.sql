@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 25, 2022 alle 18:22
+-- Creato il: Giu 14, 2022 alle 22:32
 -- Versione del server: 10.4.24-MariaDB
 -- Versione PHP: 8.1.6
 
@@ -20,7 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `cinema`
 --
-
+DROP DATABASE IF EXISTS cinema;
+CREATE DATABASE cinema;
+USE cinema;
 -- --------------------------------------------------------
 
 --
@@ -30,50 +32,28 @@ SET time_zone = "+00:00";
 CREATE TABLE `film` (
   `IDfilm` int(11) NOT NULL,
   `Title` varchar(50) NOT NULL,
-  `Plot` text NOT NULL,
   `Length` int(11) NOT NULL,
-  `ReleaseYear` date NOT NULL
+  `ReleaseYear` year(4) NOT NULL,
+  `img` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `film`
+--
+
+INSERT INTO `film` (`IDfilm`, `Title`, `Length`, `ReleaseYear`, `img`) VALUES
+(1, 'The Godfather', 125, 1972, 'https://i.ibb.co/5jfbZSp/The-Godfather.jpg'),
+(2, 'Kill bill', 112, 2003, 'https://i.ibb.co/MZBtbvZ/kill-bill.webp'),
+(3, 'I sette samurai', 128, 1954, 'https://i.ibb.co/wgVVHZp/Seven-Samurai-poster2.jpg'),
+(4, 'Cuore selvaggio', 129, 1990, 'https://i.ibb.co/zbtsgGH/cuore-selvaggio.jpg'),
+(5, 'Guerre stellari', 122, 1977, 'https://i.ibb.co/q7RrCcx/guerre-stellari.jpg'),
+(6, 'Il signore degli anelli', 143, 2001, 'https://i.ibb.co/s3QMtDS/Poster-film-Compagnia-Anello.webp'),
+(7, 'Shining', 115, 1980, 'https://i.ibb.co/VCqWpxN/shining.jpg'),
+(8, 'Psyco', 120, 1960, 'https://i.ibb.co/pzL6cCJ/phsyco.jpg'),
+(9, 'Grand Budapest Hotel', 106, 2014, 'https://i.ibb.co/YQhdyrF/grand-budapest.jpg'),
+(10, 'Jurassic Park', 118, 1993, 'https://i.ibb.co/qBXqmsB/jurassic-park.jpg');
 
 -- --------------------------------------------------------
-
---
--- Struttura della tabella `film_staff`
---
-
-CREATE TABLE `film_staff` (
-  `IDfilm` int(11) NOT NULL,
-  `IDstaff` int(11) NOT NULL,
-  `IDrole` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `role`
---
-
-CREATE TABLE `role` (
-  `IDrole` int(11) NOT NULL,
-  `roleName` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `staff`
---
-
-CREATE TABLE `staff` (
-  `IDstaff` int(11) NOT NULL,
-  `Firstname` varchar(35) NOT NULL,
-  `Lastname` varchar(35) NOT NULL,
-  `dob` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Indici per le tabelle scaricate
---
 
 --
 -- Indici per le tabelle `film`
@@ -81,55 +61,13 @@ CREATE TABLE `staff` (
 ALTER TABLE `film`
   ADD PRIMARY KEY (`IDfilm`);
 
---
--- Indici per le tabelle `film_staff`
---
-ALTER TABLE `film_staff`
-  ADD KEY `IDfilm` (`IDfilm`),
-  ADD KEY `IDrole` (`IDrole`),
-  ADD KEY `IDstaff` (`IDstaff`);
-
---
--- Indici per le tabelle `role`
---
-ALTER TABLE `role`
-  ADD PRIMARY KEY (`IDrole`);
-
---
--- Indici per le tabelle `staff`
---
-ALTER TABLE `staff`
-  ADD PRIMARY KEY (`IDstaff`);
-
---
--- AUTO_INCREMENT per le tabelle scaricate
---
 
 --
 -- AUTO_INCREMENT per la tabella `film`
 --
 ALTER TABLE `film`
-  MODIFY `IDfilm` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDfilm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
-INSERT INTO `film` (`IDfilm`, `Title`, `Plot`, `Length`, `ReleaseYear`) VALUES (NULL, 'La ricerca della felicità', 'Nel 1981 a San Francisco, Chris Gardner cerca di sbarcare il lunario vendendo una partita di scanner per rilevare la densità ossea, acquistata con i risparmi di una vita. Le vendite tuttavia scarseggiano: molti medici e ospedali ritengono il macchinario eccessivamente costoso e, tutto sommato, inutile. La situazione economica si fa sempre più disperata per Chris e la sua famiglia, composta dalla moglie Linda e dal figlio Christopher.\r\n\r\nUn giorno Chris vede un broker arrivare al posto di lavoro con la sua Ferrari e gli chiede a bruciapelo, ironicamente: \"Due domande: che lavoro fa, e come si fa?\". Decide quindi di provare a diventare anche lui broker per la stessa azienda, la Dean Witter.\r\n\r\nLa moglie, esasperata dalle promesse non mantenute dal marito e delle condizioni di vita a cui sono arrivati, soprattutto, stanca di sentir parlare il marito di progetti irrealizzabili, lo lascia.\r\n\r\nChris entra come stagista alla Dean Witter e per essere assunto deve prima studiare e lavorare molto: deve affrontare un corso non pagato della durata di sei mesi, alla fine del quale solo un aspirante broker dei venti partecipanti verrà assunto. Compito degli stagisti è contattare quanti più clienti possibile e \"chiudere\" il maggior numero di contratti.\r\n\r\nChris viene buttato fuori da casa perché non è più in grado di fornire i soldi al proprietario; allo stesso modo, gli viene confiscata l\'automobile per una serie di multe non pagate. Si trasferisce in un motel poco costoso, ma il proprietario dopo settimane di inutili richieste di pagamento gli farà trovare la serratura cambiata e i suoi averi fuori dalla porta. Chris non si perde d\'animo, continua imperterrito a cercare ogni giorno assieme a Christopher i soldi per mangiare e dormire, passando molte notti nei dormitori per senzatetto e addirittura nel bagno della metropolitana.\r\n\r\nSi divide tra la vendita degli ultimi scanner rimasti, il lavoro in azienda e la occupazione del figlio, che crede fermamente in lui nonostante la situazione complicata. Alla fine del corso semestrale, gli è comunicato che è proprio lui il candidato scelto per l\'assunzione. La sua gioia sarà incontenibile e potrà tornare ad avere una casa e una vita dignitosa.', '117', '2007-01-12')
---
--- AUTO_INCREMENT per la tabella `staff`
---
-ALTER TABLE `staff`
-  MODIFY `IDstaff` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Limiti per le tabelle scaricate
---
-
---
--- Limiti per la tabella `film_staff`
---
-ALTER TABLE `film_staff`
-  ADD CONSTRAINT `film_staff_ibfk_1` FOREIGN KEY (`IDfilm`) REFERENCES `film` (`IDfilm`),
-  ADD CONSTRAINT `film_staff_ibfk_2` FOREIGN KEY (`IDrole`) REFERENCES `role` (`IDrole`),
-  ADD CONSTRAINT `film_staff_ibfk_3` FOREIGN KEY (`IDstaff`) REFERENCES `staff` (`IDstaff`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
