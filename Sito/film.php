@@ -27,6 +27,7 @@
                     echo "<tr><td>AnnoRilascita</td><td>".$row["ReleaseYear"]."</td></tr>";
                     echo "</table>";                
                     echo "<h1>".$row["Title"]."</h1>";
+                    echo "<img src='".$row["img"]."' alt='Locandina ".$row["Title"]."'>";
                     echo "<h3>Trama</h3><p>".$row["Plot"]."</p>";
                 } else {
                 echo "</table><br><h1>Problema col db, contattare assistenza</h1>";
